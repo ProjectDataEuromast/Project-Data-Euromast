@@ -36,10 +36,10 @@ public class weatherAPICurrent {
     System.out.println("Current Temperature: "
         +  Math.round(((cwd.getMainInstance().getTemperature() - 32)*5/9 )*100)/100.0 + "'C");
   
-     //System.out.println("Rain Prediction next hour: "
-    //    +   cwd.getRainInstance().getRain1h() + " mm");
+    System.out.println("Rain Prediction next hour:"
+            +   cwd.getRainInstance().getRain1h() + "mm");
     
-    // rain = cwd.getRainInstance().getRain1h();
+     rain = cwd.getRainInstance().getRain1h();
      tempmax = (Math.round(((cwd.getMainInstance().getMaxTemperature() - 32)*5/9 )*100)/100.0);
      tempmin = (Math.round(((cwd.getMainInstance().getMinTemperature() - 32)*5/9 )*100)/100.0) ;
      //weatherlocation = "Rotterdam";
@@ -61,10 +61,10 @@ public class weatherAPICurrent {
             //3. Execute SQL query
             
             //rain query
-            //String rainmax = "insert into weather_rain"
-            //        + " (rain_max) "
-            //        + " values ("+rain+")";
-            //myStmt.executeUpdate(rainmax);
+            String rainmax = "insert into weather_rain"
+                    + " (rain_max) "
+                    + " values ("+rain+")";
+            myStmt.executeUpdate(rainmax);
             
             //temperature max and min query
             String tempamax = "insert into weather_temp"

@@ -33,7 +33,7 @@ public class TwitterDB {
         
         try {
             Query query = new Query("Euromast");
-            query.count(25);
+            query.count(10);
             QueryResult result;
             result = twitter.search(query);
             List<Status> tweets = result.getTweets();
@@ -43,6 +43,8 @@ public class TwitterDB {
                 twitterLocation = tweet.getUser().getLocation();
                 twitterDataImport();
             }
+            weatherAPICurrent w = new weatherAPICurrent();
+            w.run();
 
             System.exit(0);
             } catch (TwitterException te) {
