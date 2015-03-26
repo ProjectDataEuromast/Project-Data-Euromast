@@ -68,8 +68,7 @@ CREATE TABLE IF NOT EXISTS `projectdb`.`twitter_message` (
 -- Table `projectdb`.`twitter_time`
 CREATE TABLE IF NOT EXISTS `projectdb`.`twitter_time` (
   `twitter_time_id` INT NOT NULL AUTO_INCREMENT,
-  `twitter_date` INT NOT NULL,
-  `twitter_time` INT NOT NULL,
+  `twitter_date` DATE NOT NULL,
   PRIMARY KEY (`twitter_time_id`));
   
   -- Table `projectdb`.`weather`

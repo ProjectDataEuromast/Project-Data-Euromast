@@ -7,6 +7,7 @@ import twitter4j.Status;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 import java.util.List;
+import java.util.Date;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -14,11 +15,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
+import java.sql.*;
 
 public class TwitterDB {
     public String twitterLocation;
     public String twitterMessage;  
+    public Date twitterDate;
+    public java.sql.Date tweetTime;
     
     public void tweetsRetrieve1() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -33,7 +36,7 @@ public class TwitterDB {
         
         try {
             Query query = new Query("Euromast");
-            query.count(10);
+            query.count(20);
             QueryResult result;
             result = twitter.search(query);
             List<Status> tweets = result.getTweets();
@@ -41,6 +44,8 @@ public class TwitterDB {
                 System.out.println(tweet.getCreatedAt() +  " - " + "@" + tweet.getUser().getScreenName() + " - " + tweet.getUser().getLocation() + " - " + tweet.getText());
                 twitterMessage = tweet.getText();
                 twitterLocation = tweet.getUser().getLocation();
+                twitterDate = tweet.getCreatedAt();
+                tweetTime = new java.sql.Date(twitterDate.getTime());
                 twitterDataImport();
             }
             weatherAPICurrent w = new weatherAPICurrent();
@@ -78,8 +83,8 @@ public class TwitterDB {
             
             //TwitterMessage
             String tweet = "INSERT INTO twitter_time"
-                    + " (twitter_time_id, twitter_date, twitter_time) "
-                    + " VALUES (DEFAULT, \"1\", \"2\");";
+                    + " (twitter_time_id, twitter_date) "
+                    + " VALUES (DEFAULT, \""+tweetTime+"\");";
             myStmt.executeUpdate(tweet); 
             
             //TwitterTime
